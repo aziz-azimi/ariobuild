@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد - سیستم آموزشی</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h1>🎯 داشبورد کاربری</h1>
+            <div id="userInfo" class="message info"></div>
+            <div class="links">
+                <button id="logoutBtn" class="btn btn-primary">خروج از سیستم</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = 'https://pqmhgwhsrhsilemwhydj.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxbXFnd2hzcmhzaWxlbXdoeWRqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0OTY2MDQsImV4cCI6MjA3NTA3MjYwNH0.6dr3WOrP1JftEzUbMwyNfM2ZWXy8WZ62yVJ-n0IIwpM';
+        
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        
+        async function checkAuth() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            document.getElementById('userInfo').textContent = 
+                `👋 خوش آمدید! شما با ایمیل ${session.user.email} وارد شده‌اید.`;
+        }
+        
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        });
+        
+        checkAuth();
+    </script>
+</body>
+</html>
