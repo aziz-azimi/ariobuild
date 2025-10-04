@@ -3,31 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ورود به حساب کاربری</title>
+    <title>ورود - سیستم آموزشی</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="login-container">
+    <div class="container">
         <div class="login-box">
-            <h1>ورود</h1>
-            <form id="loginForm">
+            <h1>🎓 ورود به سیستم آموزشی</h1>
+            
+            <form id="loginForm" class="form">
                 <div class="input-group">
-                    <label for="username">نام کاربری یا ایمیل</label>
-                    <input type="text" id="username" name="username" required>
+                    <label for="email">ایمیل:</label>
+                    <input type="email" id="email" placeholder="example@email.com" required>
                 </div>
+                
                 <div class="input-group">
-                    <label for="password">کلمه عبور</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="password">رمز عبور:</label>
+                    <input type="password" id="password" placeholder="حداقل ۶ کاراکتر" required>
                 </div>
-                <button type="submit" class="login-btn">ورود</button>
+                
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    <span>ورود به سیستم</span>
+                    <div class="spinner hidden" id="spinner"></div>
+                </button>
             </form>
+
             <div class="links">
-                <a href="#">فراموشی رمز عبور؟</a>
-                <a href="#">ساخت حساب کاربری جدید</a>
+                <a href="#" id="showSignup">حساب کاربری ندارید؟ ثبت‌نام کنید</a>
+                <a href="#" id="forgotPassword">فراموشی رمز عبور</a>
             </div>
-            <div id="message"></div>
+
+            <div id="message" class="message"></div>
+        </div>
+
+        <!-- فرم ثبت‌نام -->
+        <div class="login-box hidden" id="signupBox">
+            <h1>📝 ثبت‌نام کاربر جدید</h1>
+            
+            <form id="signupForm" class="form">
+                <div class="input-group">
+                    <label for="signupEmail">ایمیل:</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="signupPassword">رمز عبور:</label>
+                    <input type="password" id="signupPassword" minlength="6" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword">تکرار رمز عبور:</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                
+                <button type="submit" class="btn btn-success" id="signupBtn">
+                    <span>ایجاد حساب کاربری</span>
+                    <div class="spinner hidden" id="signupSpinner"></div>
+                </button>
+            </form>
+
+            <div class="links">
+                <a href="#" id="showLogin">قبلاً ثبت‌نام کرده‌اید؟ ورود</a>
+            </div>
+
+            <div id="signupMessage" class="message"></div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
 </body>
 </html>
